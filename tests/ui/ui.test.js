@@ -8,6 +8,7 @@ test('UI Case', async ({ page }) => {
   const homePage = new HomePage(page);
   const productPage = new ProductPage(page);
 
+
   await homePage.open();
   await homePage.closePopup();
   await homePage.hoverOverCategory('ERKEK');
@@ -17,6 +18,7 @@ test('UI Case', async ({ page }) => {
   await productPage.selectSortingOption('2');
   await productPage.selectRandomProduct();
   await productPage.selectRandomColor();
+  await productPage.selectRandomSize();
   await productPage.addCart();
 
   const iframeElement = await page.waitForSelector('.fancybox-iframe');

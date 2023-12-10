@@ -28,6 +28,35 @@ class ProductPage {
     await colorToClick.click();
     await this.page.waitForTimeout(500);
   }
+  
+  async selectRandomSize() {
+    await this.page.waitForTimeout(1000);
+    const containerDiv = await this.page.$('.eksecenekLine.kutuluvaryasyon');
+
+    // Container içindeki '.size_box' sınıfına sahip öğeleri seç
+    const sizeElements = await containerDiv.$$('.size_box');
+
+    // 'data-stock' özniteliği 0'dan büyük olan öğeleri filtrele
+    const validSizeElements = [];
+    for (const sizeElement of sizeElements) {
+      const dataStock = await sizeElement.getAttribute('data-stock');
+      if (dataStock && parseInt(dataStock) > 0) {
+        validSizeElements.push(sizeElement);
+      }
+    }
+
+    // Eğer geçerli öğeler varsa rastgele birini seç
+    if (validSizeElements.length > 0) {
+      const randomIndex = Math.floor(Math.random() * validSizeElements.length);
+      const selectedSizeElement = validSizeElements[randomIndex];
+
+      await selectedSizeElement.click();
+    } else {
+      console.error('Uygun beden bulunamadı veya stokta yok.');
+    }
+
+  }
+
   async addCart() {
     await this.page.getByRole('button', { name: 'Sepete Ekle', exact: true }).click();
 
