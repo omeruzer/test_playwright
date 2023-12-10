@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "ui": "npx playwright test ui/ui",
+    "api": "npx playwright test api/api"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/node": "^20.10.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
   }
 }
